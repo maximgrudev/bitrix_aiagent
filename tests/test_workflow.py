@@ -117,7 +117,7 @@ class WorkflowTestCase(unittest.TestCase):
                 text="измени настройку cache.ttl=120",
             )
         )
-        self.assertIsNone(denied.state)
+        self.assertEqual(denied.state, WorkflowState.FAILED)
         self.assertIn("Операция запрещена", denied.text)
 
         allowed = self.bot.handle_update(

@@ -42,7 +42,12 @@ class CommandWorkflowService:
             original_prompt=prompt,
         )
         self._pending_by_chat[chat_id] = command
-        return self._advance_to_plan(site=site, command=command)
+        try:
+            return self._advance_to_plan(site=site, command=command)
+        except PolicyViolationError:
+            command.state = WorkflowState.FAILED
+            self._pending_by_chat.pop(chat_id, None)
+            raise
 
     def add_details(self, site: SiteBinding, chat_id: str, details: str) -> BotReply:
         command = self._require_pending(chat_id)
@@ -53,7 +58,12 @@ class CommandWorkflowService:
             )
 
         command.collected_details.append(details.strip())
-        return self._advance_to_plan(site=site, command=command)
+        try:
+            return self._advance_to_plan(site=site, command=command)
+        except PolicyViolationError:
+            command.state = WorkflowState.FAILED
+            self._pending_by_chat.pop(chat_id, None)
+            raise
 
     def confirm(self, site: SiteBinding, chat_id: str) -> BotReply:
         command = self._require_pending(chat_id)

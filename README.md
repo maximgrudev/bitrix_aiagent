@@ -24,11 +24,11 @@ MVP-каркас SaaS AI-агента для управления сайтами
 ## Локальный запуск демо
 
 ```bash
-python -m src.bitrix_aiagent.app
+PYTHONPATH=src python3 -m bitrix_aiagent.app
 ```
 
 ## Тесты
 
 ```bash
-python -m unittest discover -s tests -p "test_*.py" -v
+python3 -m unittest discover -s tests -p "test_*.py" -v
 ```
