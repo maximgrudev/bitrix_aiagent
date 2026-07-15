@@ -20,6 +20,19 @@ MVP-каркас SaaS AI-агента для управления сайтами
 - `src/bitrix_aiagent/admin_panel.py` — слой “панели доступа” сайта.
 - `src/bitrix_aiagent/bitrix.py` — адаптер Bitrix (in-memory MVP).
 - `docs/saas-bitrix-telegram-architecture.md` — целевая архитектура.
+- `local/modules/vendor.aiagent` — модуль Битрикс D7 для интеграции на стороне сайта.
+- `docs/bitrix-module-vendor-aiagent.md` — описание структуры и деплоя модуля.
+
+## Bitrix модуль (стандарты)
+
+Реализован модуль `vendor.aiagent` в формате, ожидаемом Битрикс:
+
+- `install/index.php`, `install/version.php`,
+- `include.php`, `lib/*`,
+- `options.php` для управления правами,
+- `install/tools/vendor.aiagent/webhook.php` для приема команд SaaS.
+
+Модуль применяет только безопасные операции (контент/настройки) и блокирует попытки изменений кода сайта.
 
 ## Локальный запуск демо
 

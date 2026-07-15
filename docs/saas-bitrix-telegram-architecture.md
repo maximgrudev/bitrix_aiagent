@@ -55,11 +55,11 @@
      - `update/create/delete` элемента инфоблока,
      - изменение разрешенных настроек.
 
-5. **Site Admin Panel (на стороне Bitrix)**
-   - выдача/ротация токена,
-   - настройка прав по инфоблокам,
-   - настройка уровня доступа к конфигам,
-   - привязка чатов.
+5. **Bitrix Module `vendor.aiagent` (D7)**
+   - модульная установка через `local/modules/vendor.aiagent`,
+   - webhook endpoint `/bitrix/tools/vendor.aiagent/webhook.php`,
+   - страница `options.php` для выдачи прав по инфоблокам и настройкам,
+   - policy enforcement на стороне сайта (финальный контроль перед применением).
 
 ## 5. Границы безопасности (обязательно)
 
@@ -94,7 +94,7 @@
 - state-machine сценария подтверждения;
 - policy engine с запретом изменения кода;
 - контроллер Telegram-команд;
-- in-memory Bitrix адаптер;
+- каркас Bitrix-модуля по стандартам (`local/modules/vendor.aiagent`);
 - unit-тесты критичных сценариев.
 
 ## 8. Production roadmap
